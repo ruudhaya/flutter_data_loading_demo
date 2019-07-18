@@ -1,0 +1,10 @@
+fileignoreconfig:
+- filename: .metadata
+  checksum: 2db0e9c8b226e19f4689a0295396ca5bab74bb1b8576d147e1f069fb7df56324
+  ignore_detectors: []
+- filename: ios/Runner.xcodeproj/project.pbxproj
+  checksum: efc9531bfdba938c300ad363790bd99404fb1d26af4c82400411ece44ff876cf
+  ignore_detectors: []
+- filename: ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme
+  checksum: 493ace34b973ee9428f95e8e34fb9356bebef9c367eb6ea2064dc01e3c69b977
+  ignore_detectors: []
