@@ -4,10 +4,10 @@ Simple Flutter Application to demo data loading in flutter widgets
 
 ## Project Contents
 
-Add example for Simple Event Loop
-Create a model for object
-Receive data from an API, map the response to list of model objects
-Load them onto list of widgets
+- Add example for Simple Event Loop
+- Create a model for object
+- Receive data from an API, map the response to list of model objects
+- Load them onto list of widgets
 
 
 ## Getting Started with Flutter
