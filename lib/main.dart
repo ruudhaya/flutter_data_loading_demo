@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(MyApp());
 
@@ -19,16 +20,24 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Data Loading Demo'),
+      ),
+      body: Center(
         child: RaisedButton(
           child: Text('CLICK'),
           onPressed: () {
             print("Clicked");
+            final future = http.get('http://google.com');
+            future.then((response) {
+              if (response.statusCode == 200) {
+                print('Success ${response.contentLength}');
+              }
+            });
           },
-        )
+        ),
       ),
     );
   }
 }
-

@@ -5,6 +5,8 @@ Simple Flutter Application to demo data loading in flutter widgets
 ## Project Contents
 
 - Add example for Simple Event Loop
+-- Add 'http' dependency in pubspec.yaml
+-- Raise simple http get request, and display result
 - Create a model for object
 - Receive data from an API, map the response to list of model objects
 - Load them onto list of widgets
