@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'common.dart';
 
 void main() => runApp(MyApp());
 
@@ -30,10 +31,10 @@ class HomePage extends StatelessWidget {
           onPressed: () {
             print("Clicked");
 
-            final future = http.get('https://flutter.dev/');
+            final future = http.get(fetchBooksUrl);
             future.then((response) {
               if (response.statusCode == 200) {
-                print('Success ${response.contentLength}');
+                print('Success ${response.body}');
               }
             }).catchError((err) {
               print(err.toString());
