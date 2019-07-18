@@ -1,9 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'common.dart';
 import 'models/product.dart';
+import 'webservice.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,6 +20,44 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class CataloguePage extends StatefulWidget {
+  @override
+  _CataloguePageState createState() => _CataloguePageState();
+}
+
+class _CataloguePageState extends State<CataloguePage> {
+  var productList = List<Product>();
+
+  _getProducts() {
+    Api.getProducts().then((response) {
+      setState(() {
+        Iterable list = json.decode(response.body);
+        productList = list.map((model) => Product.fromJson(model)).toList();
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    _getProducts();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(productList[index].name),
+          );
+        },
+        itemCount: productList.length,
+      ),
+    );
+  }
+}
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -28,60 +65,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Data Loading Demo'),
       ),
-      body: _getListedWidget(context),
+      body: CataloguePage(),
     );
-  }
-
-  Widget _getListedWidget(context) {
-    return FutureBuilder<Product>(
-        future: _getProductListData(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          } else if (snapshot.hasData) {
-            return _getProductWidget(snapshot.data);
-          }
-
-          return CircularProgressIndicator();
-        });
-  }
-
-  Widget _getProductWidget(Product product) {
-    return ListTile(
-      title: Text(product.name),
-      trailing: Text(product.price),
-    );
-  }
-
-  Widget _getSimpleWidget() {
-    return Center(
-      child: RaisedButton(
-        child: Text('CLICK'),
-        onPressed: () {
-          print("Clicked");
-
-          final future = http.get(fetchProductsUrl);
-          future.then((response) {
-            if (response.statusCode == 200) {
-              print('Success ${response.body}');
-            }
-          }).catchError((err) {
-            print(err.toString());
-          }).whenComplete(() {
-            print("Completed the Future Call");
-          });
-        },
-      ),
-    );
-  }
-
-  Future<Product> _getProductListData() async {
-    final response = await http.get(fetchSingleProductUrl);
-
-    if (response.statusCode == 200) {
-      return Product.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to load products');
-    }
   }
 }
