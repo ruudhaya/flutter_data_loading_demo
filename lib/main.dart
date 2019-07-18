@@ -29,11 +29,16 @@ class HomePage extends StatelessWidget {
           child: Text('CLICK'),
           onPressed: () {
             print("Clicked");
-            final future = http.get('http://google.com');
+
+            final future = http.get('https://flutter.dev/');
             future.then((response) {
               if (response.statusCode == 200) {
                 print('Success ${response.contentLength}');
               }
+            }).catchError((err) {
+              print(err.toString());
+            }).whenComplete(() {
+              print("Completed the Future Call");
             });
           },
         ),
