@@ -1,8 +1,6 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'models/product.dart';
-import 'webservice.dart';
+import 'screens/catalogue.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,44 +14,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: HomePage(),
-    );
-  }
-}
-
-class CataloguePage extends StatefulWidget {
-  @override
-  _CataloguePageState createState() => _CataloguePageState();
-}
-
-class _CataloguePageState extends State<CataloguePage> {
-  var productList = List<Product>();
-
-  _getProducts() {
-    Api.getProducts().then((response) {
-      setState(() {
-        Iterable list = json.decode(response.body);
-        productList = list.map((model) => Product.fromJson(model)).toList();
-      });
-    });
-  }
-
-  @override
-  void initState() {
-    _getProducts();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(productList[index].name),
-          );
-        },
-        itemCount: productList.length,
-      ),
     );
   }
 }
