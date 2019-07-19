@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'screens/cart.dart';
 import 'screens/catalogue.dart';
 
 void main() => runApp(MyApp());
@@ -13,7 +14,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+        '/cart': (context) => CartPage(),
+      },
     );
   }
 }
@@ -28,7 +33,7 @@ class HomePage extends StatelessWidget {
           IconButton(
               icon: Icon(Icons.shopping_cart),
               onPressed: () {
-                print('Clicked cart');
+                Navigator.pushNamed(context, '/cart');
               }),
         ],
       ),
