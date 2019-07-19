@@ -64,6 +64,13 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Data Loading Demo'),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {
+                print('Clicked cart');
+              }),
+        ],
       ),
       body: CataloguePage(),
     );

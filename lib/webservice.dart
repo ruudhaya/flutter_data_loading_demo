@@ -3,6 +3,7 @@ import 'constants.dart';
 
 class Api {
   static Future getProducts() {
+    print('Get Products Called');
     return http.get(fetchProductsUrl);
   }
 }
