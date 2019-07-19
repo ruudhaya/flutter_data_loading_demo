@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'screens/cart.dart';
 import 'screens/catalogue.dart';
+import 'screens/profile.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomePage(),
         '/cart': (context) => CartPage(),
+        '/profile': (context) => ProfilePage(),
       },
     );
   }
@@ -30,6 +31,9 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Data Loading Demo'),
         actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.person),
+              onPressed: () => Navigator.pushNamed(context, '/profile')),
           IconButton(
               icon: Icon(Icons.shopping_cart),
               onPressed: () {
